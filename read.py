@@ -8,6 +8,7 @@ with open('reviews.txt', 'r') as f:
 			print(len(data))
 print('檔案讀取完了，總共有', len(data), '筆資料')
 
+
 # 算留言平均長度
 
 # 老師寫法
@@ -32,8 +33,6 @@ print('留言的平均長度為', sum_len/len(data))
 
 # 清單篩選
 
-# 老師寫法
-
 new = []
 for d in data:
 	if len(d) < 100:
@@ -48,3 +47,40 @@ for d in data:
 	if 'good' in d:
 		good.append(d)
 print('一共有', len(good), '筆留言提到good')
+
+
+# list comprehension (清單快寫法)
+
+# good = [d for d in data if 'good' in d]
+# print(good)
+# bad = ['bad' in d for d in data]
+# print(bad)
+
+# 清單   = [   運算          變數        清單         篩選條件     ] 
+# output = [(number-1) for number in reference if number % 2 == 0]
+
+
+# 文字計數
+
+wc = {} # word_count 的字典
+for d in data:
+	words = d.split()
+	for word in words:
+		if word in wc:
+			wc[word] += 1
+		else:
+			wc[word] = 1 # 新增新的key進wc字典
+
+for word in wc:
+	if wc[word] > 10000:
+		print(word, wc[word])
+
+while True:
+	word = input("請輸入一個單字：")
+	if word == 'q':
+		break
+	if word in wc:
+		print(word, '出現過的次數為: ', wc[word])
+	else:
+		print('這個字沒有出現過喔')
+print('感謝使用本查詢功能')
